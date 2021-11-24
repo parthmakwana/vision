@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import { VisionService } from 'src/app/services/vision.service';
 
 // core components
 import {
@@ -23,7 +24,12 @@ export class DashboardComponent implements OnInit {
   public clicked1: boolean = false;
   selectedFrame: any = "patientStats";
 
+  constructor(private visionService: VisionService) {
+
+  }
+
   ngOnInit() {
+    this.getAPI();
 
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],
@@ -50,6 +56,12 @@ export class DashboardComponent implements OnInit {
       options: chartExample1.options,
       data: chartExample1.data
     });
+  }
+
+  getAPI() {
+    this.visionService.getAPI().subscribe((res: any) => {
+      console.log("response from get api ", res);
+    })
   }
 
   changeFrame(frame: any) {

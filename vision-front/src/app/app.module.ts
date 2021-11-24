@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { PatientComponent } from './pages/patient/patient.component';
 import { DrugComponent } from './pages/drug/drug.component';
+import { VisionService } from './services/vision.service';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { DrugComponent } from './pages/drug/drug.component';
     PatientComponent,
     DrugComponent
   ],
-  providers: [],
+  providers: [VisionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
