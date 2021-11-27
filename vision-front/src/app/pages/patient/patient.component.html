@@ -43,8 +43,10 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="javascript:void(0)">View Prediction</a>
-                                            <a class="dropdown-item" href="javascript:void(0)">Setup an appointment</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                (click)="viewPrediction(content,p)">View Prediction</a>
+                                            <a class=" dropdown-item" href="javascript:void(0)">Setup an
+                                                appointment</a>
                                         </div>
                                     </div>
                                 </td>
@@ -151,3 +153,25 @@
         </div>
     </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Prediction Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <span>Name: {{selectedRow.name}}</span><br />
+        <span>Prescribed Drugs: {{selectedRow.prescribedDrugs}}</span><br />
+        <span>Cancer Stage: {{selectedRow.cancerStage}}</span><br />
+        <span>Prediction: {{predictionData.prediction}}</span><br />
+        <span>Probability: {{predictionData.probability}}</span>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openVerticallyCentered(content)">Modal vertically
+    centered</button> -->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Patient } from 'src/app/models/patient.model';
 import { VisionService } from 'src/app/services/vision.service';
 
@@ -13,7 +14,50 @@ export class PatientComponent implements OnInit {
 
   //patientsData: Patient[] = res;
 
+<<<<<<< Updated upstream
   constructor(private visionService: VisionService) { }
+=======
+  patientsData: Patient[] = [{
+    name: "Jack1",
+    age: 45,
+    gender: "Male",
+    cancerStage: 2,
+    prescribedDrugs: "Drug1, Drug2"
+  },
+  {
+    name: "Jack2",
+    age: 45,
+    gender: "Male",
+    cancerStage: 2,
+    prescribedDrugs: "Drug1, Drug2"
+  },
+  {
+    name: "Jack3",
+    age: 45,
+    gender: "Male",
+    cancerStage: 2,
+    prescribedDrugs: "Drug1, Drug2"
+  },
+  {
+    name: "Jack4",
+    age: 45,
+    gender: "Male",
+    cancerStage: 2,
+    prescribedDrugs: "Drug1, Drug2"
+  },
+  {
+    name: "Jack5",
+    age: 45,
+    gender: "Male",
+    cancerStage: 2,
+    prescribedDrugs: "Drug1, Drug2"
+  }];
+
+  selectedRow: Patient = new Patient();
+  predictionData: any = { prediction: 4, probability: "67%" };
+
+  constructor(private modalService: NgbModal) { }
+>>>>>>> Stashed changes
 
   ngOnInit(): void {
 
@@ -25,6 +69,14 @@ export class PatientComponent implements OnInit {
       this.patientsData=res;
       console.log("response from get api ", res);
     })
+  }
+
+
+
+  viewPrediction(content, rowData: Patient) {
+    console.log(content);
+    this.selectedRow = rowData;
+    this.modalService.open(content, { centered: true });
   }
 
 }
