@@ -14,51 +14,17 @@ export class PatientComponent implements OnInit {
 
   //patientsData: Patient[] = res;
 
-<<<<<<< Updated upstream
-  constructor(private visionService: VisionService) { }
-=======
-  patientsData: Patient[] = [{
-    name: "Jack1",
-    age: 45,
-    gender: "Male",
-    cancerStage: 2,
-    prescribedDrugs: "Drug1, Drug2"
-  },
-  {
-    name: "Jack2",
-    age: 45,
-    gender: "Male",
-    cancerStage: 2,
-    prescribedDrugs: "Drug1, Drug2"
-  },
-  {
-    name: "Jack3",
-    age: 45,
-    gender: "Male",
-    cancerStage: 2,
-    prescribedDrugs: "Drug1, Drug2"
-  },
-  {
-    name: "Jack4",
-    age: 45,
-    gender: "Male",
-    cancerStage: 2,
-    prescribedDrugs: "Drug1, Drug2"
-  },
-  {
-    name: "Jack5",
-    age: 45,
-    gender: "Male",
-    cancerStage: 2,
-    prescribedDrugs: "Drug1, Drug2"
-  }];
+
+  constructor(private visionService: VisionService,private modalService: NgbModal) { }
+
+
 
   selectedRow: Patient = new Patient();
   predictionData: any = { prediction: 4, probability: "67%" };
 
-  constructor(private modalService: NgbModal) { }
->>>>>>> Stashed changes
 
+
+  
   ngOnInit(): void {
 
     this.getPatientData();
