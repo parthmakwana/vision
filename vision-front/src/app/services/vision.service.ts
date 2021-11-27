@@ -8,7 +8,15 @@ export class VisionService {
 
   constructor(private http: HttpClient) { }
 
+  getPatientData() {
+    return this.http.get('http://localhost:5000/read/patientData');
+  }
+
   getAPI() {
-    return this.http.get('http://localhost:5000/api/food');
+    return this.http.get('http://localhost:5000/read/patientData');
+  }
+
+  getDrugData() {
+    return this.http.get('http://localhost:5000/read/drugsData');
   }
 }

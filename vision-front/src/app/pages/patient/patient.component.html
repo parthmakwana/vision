@@ -18,20 +18,25 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Name</th>
-                                <th scope="col">Gender</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Height</th>
+                                <th scope="col">Weight</th>
                                 <th scope="col">Age</th>
-                                <th scope="col">Cancer Stage</th>
-                                <th scope="col">Drugs prescribed</th>
-                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let p of patientsData">
                                 <td>{{p.name}}</td>
-                                <td>{{p.gender}}</td>
+                                <td>{{p.city}}</td>
+                                <td>{{p.phone_number}}</td>
+                                <td>{{p.date}}</td>
+                                <td>{{p.id}}</td>
+                                <td>{{p.height}}</td>
+                                <td>{{p.weight}}</td>
                                 <td>{{p.age}}</td>
-                                <td>{{p.cancerStage}}</td>
-                                <td>{{p.prescribedDrugs}}</td>
                                 <td class="">
                                     <div ngbDropdown placement="bottom-right">
                                         <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>

@@ -18,13 +18,21 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Name</th>
-                                <th scope="col">Description</th>
+                                <th scope="col">Biosimilar</th>
+                                <th scope="col">Dosage</th>
+                                <th scope="col">Efficacy</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Type</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let d of drugsData">
-                                <td>{{d.name}}</td>
-                                <td>{{d.description}}</td>
+                                <td>{{d.Drug_Name}}</td>
+                                <td>{{d.Biosimilar}}</td>
+                                <td>{{d.Dosage}}</td>
+                                <td>{{d.Efficacy}}</td>
+                                <td>{{d.Time}}</td>
+                                <td>{{d.Type}}</td>
                             </tr>
                         </tbody>
                     </table>
