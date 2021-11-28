@@ -1,5 +1,5 @@
 -- create schema
-DROP DATABASE `vision`;
+DROP DATABASE IF EXISTS `vision`;
 CREATE SCHEMA `vision` DEFAULT CHARACTER SET utf8mb4 ; 
 
 -- create table `vision`
@@ -9,8 +9,7 @@ CREATE TABLE `vision`.`patient` (
   `age` INT(3) NOT NULL,
   `gender` TINYINT(1) NOT NULL,
   `phnoe_no` VARCHAR(15) NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  PRIMARY KEY (`id`));
   
 -- create table 'patient history'
   CREATE TABLE `vision`.`patient_history` (
@@ -22,16 +21,14 @@ CREATE TABLE `vision`.`patient` (
   `blood_pressure` VARCHAR(10) NOT NULL,
   `diagnosis` VARCHAR(50) NOT NULL,
   `doc_notes` VARCHAR(1000) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  PRIMARY KEY (`id`));
 
 -- create table `drugs`
 CREATE TABLE `vision`.`drugs` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(60) NOT NULL,
   `description` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  PRIMARY KEY (`id`));
 
 -- create table `prescription`  
   CREATE TABLE `vision`.`prescription` (
@@ -41,8 +38,7 @@ CREATE TABLE `vision`.`drugs` (
   `start_date` DATETIME NOT NULL,
   `end_date` DATETIME NOT NULL,
   `trx` VARCHAR(60) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  PRIMARY KEY (`id`));
 
 -- create table `appointment`
 CREATE TABLE `vision`.`appointment` (
@@ -52,16 +48,14 @@ CREATE TABLE `vision`.`appointment` (
   `doctor_id` INT(11) NOT NULL,
   `notes` VARCHAR(150) NOT NULL,
   `status` TINYINT(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  PRIMARY KEY (`id`));
 
 -- create table `doctor`
 CREATE TABLE `vision`.`doctor` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `specialist` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  PRIMARY KEY (`id`));
 
 -- create table `login`
 CREATE TABLE `vision`.`login` (
@@ -107,14 +101,14 @@ ADD CONSTRAINT `patient_id_fkk`
   ON UPDATE NO ACTION;
  
 -- index for patient_history 
- ALTER TABLE `vision`.`patient_history` 
-ADD INDEX `patient_id_idx` (`patient_id` ASC) VISIBLE;
-;
+--  ALTER TABLE `vision`.`patient_history` 
+-- ADD INDEX `patient_id_idx` (`patient_id` ASC) VISIBLE;
+-- ;
 
 -- index for patient_history
-ALTER TABLE `vision`.`patient_history` 
-ADD INDEX `appointment_id_idx` (`appointment_id` ASC) VISIBLE;
-; 
+-- ALTER TABLE `vision`.`patient_history` 
+-- ADD INDEX `appointment_id_idx` (`appointment_id` ASC) VISIBLE;
+-- ; 
 
 -- alter appointment 
 ALTER TABLE `vision`.`appointment` 
