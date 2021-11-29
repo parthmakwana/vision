@@ -16,6 +16,7 @@ import { PatientComponent } from './pages/patient/patient.component';
 import { DrugComponent } from './pages/drug/drug.component';
 import { VisionService } from './services/vision.service';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { LocalStorageService } from './services/local-storage.service';
 
 @NgModule({
   imports: [
@@ -35,7 +36,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PatientComponent,
     DrugComponent
   ],
-  providers: [VisionService],
+  providers: [VisionService, LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

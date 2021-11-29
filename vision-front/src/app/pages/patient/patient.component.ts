@@ -14,7 +14,9 @@ export class PatientComponent implements OnInit {
   //patientsData: Patient[] = res;
 
 
-  constructor(private visionService: VisionService, private modalService: NgbModal) { }
+  constructor(private visionService: VisionService, private modalService: NgbModal) {
+    this.visionService.validateLoggedInSession();
+  }
 
 
 

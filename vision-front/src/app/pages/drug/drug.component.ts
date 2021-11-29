@@ -20,7 +20,9 @@ export class DrugComponent implements OnInit {
   pageSize: number = 5;
   public focus;
 
-  constructor(private visionService: VisionService) { }
+  constructor(private visionService: VisionService) {
+    this.visionService.validateLoggedInSession();
+  }
 
   ngOnInit(): void {
     this.getPatientData();

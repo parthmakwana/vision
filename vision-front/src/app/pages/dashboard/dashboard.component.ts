@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   selectedFrame: any = "patientStats";
 
   constructor(private visionService: VisionService) {
-
+    this.visionService.validateLoggedInSession();
   }
 
   ngOnInit() {
