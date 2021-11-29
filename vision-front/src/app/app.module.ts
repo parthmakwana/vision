@@ -15,7 +15,7 @@ import { ComponentsModule } from './components/components.module';
 import { PatientComponent } from './pages/patient/patient.component';
 import { DrugComponent } from './pages/drug/drug.component';
 import { VisionService } from './services/vision.service';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -25,7 +25,8 @@ import { VisionService } from './services/vision.service';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgSelectModule
   ],
   declarations: [
     AppComponent,

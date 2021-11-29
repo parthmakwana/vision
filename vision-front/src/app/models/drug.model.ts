@@ -1,4 +1,5 @@
 export class Drug {
-    name: string;
+    Drug_Name: string;
     description: string;
+    index: any;
 }
