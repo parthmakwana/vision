@@ -61,6 +61,8 @@
                                         <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="javascript:void(0)"
                                                 (click)="viewPrediction(content,p)">View Prediction</a>
+                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                (click)="viewHistory(historycontent,p)">View History</a>
                                             <a class=" dropdown-item" href="javascript:void(0)">Setup an
                                                 appointment</a>
                                         </div>
@@ -87,12 +89,58 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body ">
         <span>Name: {{selectedRow.name}}</span><br />
         <span>Prescribed Drugs: {{selectedRow.prescribedDrugs}}</span><br />
         <span>Cancer Stage: {{selectedRow.cancerStage}}</span><br />
         <span>Prediction: {{predictionData.prediction}}</span><br />
         <span>Probability: {{predictionData.probability}}</span>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #historycontent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Patient History</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" style="height: 400px;overflow: auto;">
+        <!-- <div *ngFor="let d of historyData" class="card bg-default shadow p-2 text-white mb-1">
+            Patient Name: {{d.name}} <br />
+            Date: {{d.datetime}} <br />
+            Weight: {{d.weight}} <br />
+            Blood Pressure: {{d.blood_pressure}}mm/Hg <br />
+            Diagnosis: {{d.diagnosis}} <br />
+            Doctor Notes: {{d.doc_notes}} 
+        </div> -->
+        <div class="card bg-default shadow p-2 text-white mb-1">
+            Patient Name: Jack <br />
+            Date: 12th Dec, 2021 <br />
+            Weight: 65kg <br />
+            Blood Pressure: 80-128mm/Hg <br />
+            Diagnosis: Lung Cancer <br />
+            Doctor Notes: Test 
+        </div>
+        <div class="card bg-default shadow p-2 text-white  mb-1">
+            Patient Name: Jack <br />
+            Date: 12th Dec, 2021 <br />
+            Weight: 65kg <br />
+            Blood Pressure: 80-128mm/Hg <br />
+            Diagnosis: Lung Cancer <br />
+            Doctor Notes: Test 
+        </div>
+        <div class="card bg-default shadow p-2 text-white mb-1">
+            Patient Name: Jack <br />
+            Date: 12th Dec, 2021 <br />
+            Weight: 65kg <br />
+            Blood Pressure: 80-128mm/Hg <br />
+            Diagnosis: Lung Cancer <br />
+            Doctor Notes: Test 
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

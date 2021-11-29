@@ -10,6 +10,7 @@ import { VisionService } from 'src/app/services/vision.service';
 })
 export class PatientComponent implements OnInit {
   patientsData: Patient[] = [];
+  historyData:any[] = [];
 
   //patientsData: Patient[] = res;
 
@@ -64,6 +65,14 @@ export class PatientComponent implements OnInit {
         }
       }
     }
+  }
+
+  viewHistory(content, rowData: Patient) {
+    this.historyData = [];
+    console.log(content);
+    this.selectedRow = rowData;
+    // call api to fetch history
+    this.modalService.open(content, {  });
   }
 
 }
