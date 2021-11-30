@@ -40,12 +40,29 @@ export class PatientComponent implements OnInit {
     })
   }
 
+  getPatientHistory(body){
+    this.visionService.checkLogin(body).subscribe((res: any ) => {
+      
+      this.historyData=res
+
+      console.log("response from login cdcvzd ",this.historyData);
+    })
+
+  }
 
 
   viewPrediction(content, rowData: Patient) {
     console.log(content);
+
+
     this.selectedRow = rowData;
+    let body= {"id": rowData.id}
+
+    this.getPatientHistory(JSON.stringify(body));
+
     this.modalService.open(content, { centered: true });
+
+
   }
 
   myFunction() {

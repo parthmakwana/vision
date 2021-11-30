@@ -30,4 +30,14 @@ export class VisionService {
     }
   }
 
+  checkLogin(body) {
+
+    return this.http.post('http://localhost:5000/read/login',body);
+  }
+
+  getPatientHistory(body) {
+
+    return this.http.post('http://localhost:5000/read/patient_history',body);
+  }
+
 }
