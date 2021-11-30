@@ -60,12 +60,8 @@ def drugsData():
 
 @app.route('/read/login',methods=['POST'])
 def loginUser():
-    print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
+    print('inside LOGIN')
 
-    # if request.method=='POST':
-    #     userDetails = request.get_json(force=True)
-    #     nameID = userDetails['name']
-    #     userPassword = userDetails['password']
 
     if request.method=='POST':
     #fetch form data
@@ -114,16 +110,8 @@ def loginUser():
 def patientHistory():
     print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
 
-    # if request.method=='POST':
-    #     userDetails = request.get_json(force=True)
-    #     nameID = userDetails['name']
-    #     userPassword = userDetails['password']
 
     if request.method=='POST':
-    #fetch form data
-
-        data=request.get_json()
-        print("Hellllloooooooooo",data)
 
         userDetails = request.get_json(force=True)
         patientID = userDetails['id']
@@ -131,35 +119,26 @@ def patientHistory():
         print(patientID)
         print('--------------------------------------------------------------------------------------------')
 
-        sql= "Select * from patient_history WHERE id = %s"
+        sql= "Select * from patient_history WHERE id = {0}".format(patientID)
 
         cur = mysql.connection.cursor()
-        count = cur.execute(sql,(patientID))
+        count = cur.execute(sql)
         print(type(count))
         if(count>0):
         
-            json_data=dict()
-            print("qwr")
-            #json_data.append(dict(zip(("status",count))))
-            json_data["status"]=(True)
-            
-            cur.execute(sql,(patientID))
-            userDetail= cur.fetchone()
-            #json_data.append(dict(zip(("userName",username))))
-            json_data["userName"]=username[0]
-            print(json_data)
+            row_headers=[x[0] for x in cur.description] #this will extract row headers
+            rv = cur.fetchall()
 
-          
-           
+            print(rv)
+            print('--------------------------------------------------------------------------------------------')
+            json_data=[]
+            for result in rv:
+
+                json_data.append(dict(zip(row_headers,result)))
+
+            print('--------------------------------------------------------------------------------------------')
             print(json_data)
-            return jsonify(json_data)
-        else:
-            print("In")
-            json_data=dict()
-            json_data["status"]=(False)
-            json_data["userName"]=""
-            
-            return jsonify(json_data)
+        return jsonify(json_data)
 
 
    

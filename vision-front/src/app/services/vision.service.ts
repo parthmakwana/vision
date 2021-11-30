@@ -32,10 +32,14 @@ export class VisionService {
 
   checkLogin(body) {
 
+    console.log("response from LOGIN SERVICE ",body);
+
     return this.http.post('http://localhost:5000/read/login',body);
   }
 
   getPatientHistory(body) {
+
+    console.log("response from patient history SERVICE ",body);
 
     return this.http.post('http://localhost:5000/read/patient_history',body);
   }

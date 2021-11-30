@@ -41,7 +41,7 @@ export class PatientComponent implements OnInit {
   }
 
   getPatientHistory(body){
-    this.visionService.checkLogin(body).subscribe((res: any ) => {
+    this.visionService.getPatientHistory(body).subscribe((res: any ) => {
       
       this.historyData=res
 
@@ -56,10 +56,9 @@ export class PatientComponent implements OnInit {
 
 
     this.selectedRow = rowData;
-    let body= {"id": rowData.id}
+    
 
-    this.getPatientHistory(JSON.stringify(body));
-
+    
     this.modalService.open(content, { centered: true });
 
 
@@ -89,6 +88,9 @@ export class PatientComponent implements OnInit {
     console.log(content);
     this.selectedRow = rowData;
     // call api to fetch history
+    let body= {"id": rowData.id}
+    this.getPatientHistory(JSON.stringify(body));
+    console.log("response from patient history cdcvzd ",body);
     this.modalService.open(content, {  });
   }
 

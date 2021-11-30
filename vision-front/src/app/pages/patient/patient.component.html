@@ -109,15 +109,18 @@
         </button>
     </div>
     <div class="modal-body" style="height: 400px;overflow: auto;">
-        <!-- <div *ngFor="let d of historyData" class="card bg-default shadow p-2 text-white mb-1">
+         <div *ngFor="let d of historyData" class="card bg-default shadow p-2 text-white mb-1">
             Patient Name: {{d.name}} <br />
-            Date: {{d.datetime}} <br />
-            Weight: {{d.weight}} <br />
-            Blood Pressure: {{d.blood_pressure}}mm/Hg <br />
-            Diagnosis: {{d.diagnosis}} <br />
-            Doctor Notes: {{d.doc_notes}} 
-        </div> -->
-        <div class="card bg-default shadow p-2 text-white mb-1">
+            Date: {{d.date}} <br />
+            Blood Pressure (Diastolic): {{d.'bp-diast'}}mm/Hg <br />
+            Blood Pressure (Systolic): {{d.'bp-systolic'}}mm/Hg <br />
+            Double Lung Infection: {{d.double_lung_infection}} <br />
+            Stage: {{d.stage}} <br />
+            Tumor Size: {{d.tumor_size}} <br />
+            Body Temperature: {{d.temperature}} <br />
+            Drug: {{d.drug}} 
+        </div> 
+        <!-- <div class="card bg-default shadow p-2 text-white mb-1">
             Patient Name: Jack <br />
             Date: 12th Dec, 2021 <br />
             Weight: 65kg <br />
@@ -140,7 +143,7 @@
             Blood Pressure: 80-128mm/Hg <br />
             Diagnosis: Lung Cancer <br />
             Doctor Notes: Test 
-        </div>
+        </div> -->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
