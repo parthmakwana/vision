@@ -44,4 +44,11 @@ export class VisionService {
     return this.http.post('http://localhost:5000/read/patient_history',body);
   }
 
+  getPrediction(body) {
+
+    console.log("response from patient history SERVICE ",body);
+
+    return this.http.post('http://localhost:5000/read/patient_history',body);
+  }
+
 }

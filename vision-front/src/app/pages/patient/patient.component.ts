@@ -50,12 +50,26 @@ export class PatientComponent implements OnInit {
 
   }
 
+  getPrediction(body){
+    this.visionService.getPrediction(body).subscribe((res: any ) => {
+      
+      this.predictionData=res
 
+      console.log("response from login cdcvzd ",this.historyData);
+    })
+
+
+  }
   viewPrediction(content, rowData: Patient) {
     console.log(content);
 
 
     this.selectedRow = rowData;
+
+    // call api to fetch history
+    let body= {"id": rowData.id}
+    this.getPrediction(JSON.stringify(body));
+    console.log("response from patient history cdcvzd ",body);
     
 
     
