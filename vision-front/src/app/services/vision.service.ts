@@ -51,4 +51,12 @@ export class VisionService {
     return this.http.post('http://localhost:5000/read/patient_history',body);
   }
 
+
+  getDrugEfficacyPrediction(body) {
+
+    console.log("response from drug Efficacy SERVICE ",body);
+
+    return this.http.post('http://localhost:5000/read/drug_efficacy',body);
+  }
+
 }

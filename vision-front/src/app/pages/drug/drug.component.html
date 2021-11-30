@@ -42,7 +42,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let d of drugsData | slice: (page-1) * pageSize : page * pageSize">
-                                <td>{{d.Drug_Name}}</td>
+                                <td>{{d.drug}}</td>
                                 <td>{{d.Biosimilar}}</td>
                                 <td>{{d.Dosage}}</td>
                                 <td>{{d.Efficacy}}</td>
@@ -79,7 +79,7 @@
                         Select Drug
                     </div>
                     <div class="col-xl-2 col-lg-2">
-                        <ng-select [items]="drugsData" bindLabel="Drug_Name" bindValue="index"
+                        <ng-select [items]="drugsData" bindLabel="drug" bindValue="drug"
                             [(ngModel)]="selectedDrug">
                         </ng-select>
                     </div>

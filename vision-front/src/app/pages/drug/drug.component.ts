@@ -33,7 +33,7 @@ export class DrugComponent implements OnInit {
     this.visionService.getDrugData().subscribe((res: any) => {
       this.drugsData = res;
       if (this.drugsData) {
-        this.selectedDrug = this.drugsData[0].index;
+        this.selectedDrug = this.drugsData[0].Drug_Name;
       }
       console.log("response from get api ", res);
     })
@@ -51,7 +51,19 @@ export class DrugComponent implements OnInit {
 
   findEfficacyPrection() {
     // call API - use selectedPatient and selectedDrug for the parameters and save in predictedEfficacy
-    console.log("findEfficacyPrection");
+
+    let body = { "patientID": this.selectedPatient,"drugName": this.selectedDrug }
+
+    this.visionService.getDrugEfficacyPrediction(body).subscribe((res: any) => {
+
+      this.predictedEfficacy = res
+
+      console.log("response from findEfficacyPrection cdcvzd ", this.predictedEfficacy);
+    })
+
+
+
+    console.log("findEfficacyPrection LOG",this.selectedPatient,this.selectedDrug);
   }
 
 }
