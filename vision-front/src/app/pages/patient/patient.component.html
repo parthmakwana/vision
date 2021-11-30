@@ -21,8 +21,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-search"></i></span>
                                     </div>
-                                    <input id="myInput" class="form-control" placeholder="Search" type="text" (focus)="focus = true" (keyup)="myFunction()"
-                                        (blur)="focus = false">
+                                    <input id="myInput" class="form-control" placeholder="Search" type="text"
+                                        (focus)="focus = true" (keyup)="myFunction()" (blur)="focus = false">
                                 </div>
                             </div>
                         </form>
@@ -61,9 +61,10 @@
                                         <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="javascript:void(0)"
                                                 (click)="viewPrediction(content,p)">View Prediction</a>
-                                                <a class="dropdown-item" href="javascript:void(0)"
+                                            <a class="dropdown-item" href="javascript:void(0)"
                                                 (click)="viewHistory(historycontent,p)">View History</a>
-                                            <a class=" dropdown-item" href="javascript:void(0)">Setup an
+                                            <a class=" dropdown-item" href="javascript:void(0)"
+                                                (click)="openAppointment(appointmentcontent,p)">Setup an
                                                 appointment</a>
                                         </div>
                                     </div>
@@ -101,15 +102,15 @@
     </div>
 </ng-template>
 
-<ng-template #historycontent let-modal>
+<ng-template #historycontent let-historymodal>
     <div class="modal-header">
         <h4 class="modal-title">Patient History</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <button type="button" class="close" aria-label="Close" (click)="historymodal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body" style="height: 400px;overflow: auto;">
-         <div *ngFor="let d of historyData" class="card bg-default shadow p-2 text-white mb-1">
+        <div *ngFor="let d of historyData" class="card bg-default shadow p-2 text-white mb-1">
             Patient Name: {{d.name}} <br />
             Date: {{d.date}} <br />
             Blood Pressure (Diastolic): {{d.bp_diast}}mm/Hg <br />
@@ -118,8 +119,8 @@
             Stage: {{d.stage}} <br />
             Tumor Size: {{d.tumor_size}} <br />
             Body Temperature: {{d.temperature}} <br />
-            Drug: {{d.drug}} 
-        </div> 
+            Drug: {{d.drug}}
+        </div>
         <!-- <div class="card bg-default shadow p-2 text-white mb-1">
             Patient Name: Jack <br />
             Date: 12th Dec, 2021 <br />
@@ -146,6 +147,42 @@
         </div> -->
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-light" (click)="historymodal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #appointmentcontent let-appointmentmodal>
+    <div class="modal-header">
+        <h4 *ngIf="!successModal" class="modal-title">Setup an Appointment</h4>
+        <h4 *ngIf="successModal" class="modal-title">Success</h4>
+        <button type="button" class="close" aria-label="Close" (click)="appointmentmodal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div *ngIf="!successModal" class="modal-body ">
+        <div class="card bg-default text-white shadow p-3 row">
+            <span class="text-center" *ngIf="naError" style="color: #f5365c;">Please select different time slot as time
+                slot is not available!</span><br />
+            <span class="text-center" *ngIf="futureError" style="color: #f5365c;">Please select future data and
+                time!</span>
+            <div class="col-xl-12 col-lg-12">Patient Name: {{selectedRow.name}}</div>
+            <div class="col-xl-12 col-lg-12">Doctor Name: {{loggedInName}}</div>
+            <div class="col-xl-12 col-lg-12">Selected Appointment time-slot: {{selectedDate}}</div>
+            <div class="col-xl-12 col-lg-12 mt-2">
+                <dl-date-time-picker maxView="year" minView="minute" startView="day" minuteStep="30"
+                    [(ngModel)]="selectedDate" (change)="onCustomDateChange($event)" leftIconClass="fas fa-chevron-left"
+                    rightIconClass="fas fa-chevron-right">
+                </dl-date-time-picker>
+            </div>
+            <div class="col-xl-12 col-lg-12 text-center">
+                <button type="button" class="btn btn-primary" (click)="createAppointment();">Setup</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="successModal" class="modal-body text-center" style="color: #f5365c;">
+        Appointment created successfully!
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="appointmentmodal.close('Close click')">Close</button>
     </div>
 </ng-template>

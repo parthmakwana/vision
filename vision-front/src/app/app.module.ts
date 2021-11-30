@@ -17,6 +17,7 @@ import { DrugComponent } from './pages/drug/drug.component';
 import { VisionService } from './services/vision.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LocalStorageService } from './services/local-storage.service';
+import {DlDateTimePickerModule, DlDateTimeDateModule} from 'angular-bootstrap-datetimepicker';
 
 @NgModule({
   imports: [
@@ -27,7 +28,9 @@ import { LocalStorageService } from './services/local-storage.service';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    NgSelectModule
+    NgSelectModule,
+    DlDateTimePickerModule,
+    DlDateTimeDateModule
   ],
   declarations: [
     AppComponent,

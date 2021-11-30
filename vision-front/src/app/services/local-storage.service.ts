@@ -24,4 +24,12 @@ export class LocalStorageService {
     }
   }
 
+  getLoggedInID(){
+    return this.get('loggedInID');
+  }
+
+  getLoggedInName(){
+    return this.get('loggedInName');
+  }
+
 }
