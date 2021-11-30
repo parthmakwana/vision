@@ -1,0 +1,112 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-7">
+    <div class="container-fluid">
+        <div class="header-body">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card bg-default shadow p-3">
+                <div class="card-header bg-transparent border-0 row">
+                    <div class="col-xl-12 col-lg-12">
+                        <h3 class="text-white mb-0">Appointment Data on <span
+                                style="color: #f5365c;">{{displayDatetime}}</span></h3>
+                    </div>
+                </div>
+                <div class=" mt-3 text-white">
+                    <dl-date-time-picker maxView="year" minView="day" startView="day" minuteStep="30"
+                        [(ngModel)]="selectedDate" (change)="onCustomDateChange($event)"
+                        leftIconClass="fas fa-chevron-left" rightIconClass="fas fa-chevron-right">
+                    </dl-date-time-picker>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-dark table-flush" id="myTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Patient Name</th>
+                                <th scope="col">Doctor Name</th>
+                                <th scope="col">Date and Time</th>
+                                <th scope="col">Doctor Notes</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of appointmentData | slice: (page-1) * pageSize : page * pageSize">
+                                <td>{{a.patient_name}}</td>
+                                <td>{{a.doctor_name}}</td>
+                                <td>{{a.datetime}}</td>
+                                <td>{{a.doc_notes ? a.doc_notes : '—'}}</td>
+                                <td class="">
+                                    <div ngbDropdown placement="bottom-right">
+                                        <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </a>
+                                        <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                (click)="addNotes(notescontent,a)">Add Notes</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                (click)="deleteAppointment(content,a)">Delete Appointment</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="appointmentData.length==0" class="text-center">
+                                <td colspan="5">
+                                    <h3 class="text-white">No records found!</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="appointmentData.length > 0" class="card-footer py-4 bg-default">
+                    <ngb-pagination class="d-flex justify-content-end" [(page)]="page" [(pageSize)]="pageSize"
+                        [(collectionSize)]="appointmentData.length" [maxSize]="5" [boundaryLinks]="true">
+                    </ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Success</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center" style="color: #f5365c;">
+        Appointment deleted successfully!
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #notescontent let-notesmodal>
+    <div class="modal-header">
+        <h4 *ngIf="!successModal" class="modal-title">Enter Notes</h4>
+        <h4 *ngIf="successModal" class="modal-title">Success</h4>
+        <button type="button" class="close" aria-label="Close" (click)="notesmodal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div *ngIf="!successModal" class="modal-body text-center">
+        <div class="card bg-default p-2">
+            <textarea class="bg-default text-white" rows="5" [(ngModel)]="notes"
+                placeholder="Type your notes"></textarea>
+            <div class="col-xl-12 col-lg-12 text-center mt-2 mb-2">
+                <button type="button" class="btn btn-primary" (click)="saveNotes();">Save notes</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="successModal" class="modal-body text-center" style="color: #f5365c;">
+        Notes saved successfully!
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="notesmodal.close('Close click')">Close</button>
+    </div>
+</ng-template>

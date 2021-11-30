@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
   // { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
   { path: '/patient', title: 'Patients', icon: 'ni-tv-2 text-primary', class: '' },
   { path: '/drug', title: 'Drugs', icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/calendar', title: 'Calendar', icon: 'ni-tv-2 text-primary', class: '' }
 ];
 
 @Component({

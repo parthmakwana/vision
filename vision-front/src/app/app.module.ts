@@ -18,6 +18,7 @@ import { VisionService } from './services/vision.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LocalStorageService } from './services/local-storage.service';
 import {DlDateTimePickerModule, DlDateTimeDateModule} from 'angular-bootstrap-datetimepicker';
+import { CalendarComponent } from './pages/calendar/calendar.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {DlDateTimePickerModule, DlDateTimeDateModule} from 'angular-bootstrap-da
     AdminLayoutComponent,
     AuthLayoutComponent,
     PatientComponent,
-    DrugComponent
+    DrugComponent,
+    CalendarComponent
   ],
   providers: [VisionService, LocalStorageService],
   bootstrap: [AppComponent]

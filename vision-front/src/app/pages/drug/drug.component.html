@@ -49,10 +49,15 @@
                                 <td>{{d.Time}}</td>
                                 <td>{{d.Type}}</td>
                             </tr>
+                            <tr *ngIf="drugsData.length==0" class="text-center">
+                                <td colspan="9">
+                                    <h3 class="text-white">No records found!</h3>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer py-4 bg-default">
+                <div *ngIf="drugsData.length>0" class="card-footer py-4 bg-default">
                     <ngb-pagination class="d-flex justify-content-end" [(page)]="page" [(pageSize)]="pageSize"
                         [(collectionSize)]="drugsData.length" [maxSize]="5" [boundaryLinks]="true">
                     </ngb-pagination>
