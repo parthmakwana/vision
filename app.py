@@ -8,7 +8,7 @@ import json
 # import numpy
 # #loading models
 # fin=glob.glob("models/model_efficacy-Copy1.pkl")
-# model_efficacy =pickle.load(open('models/model_stage.pkl', 'rb'))
+# model_efficacy =pickle.load(open('models/model_efficacy.pkl', 'rb'))
 # #model_stage =pickle.load(open('/models/model_stage.pkl', 'rb'))
 
 app = Flask(__name__)
@@ -108,16 +108,15 @@ def loginUser():
 
 @app.route('/read/patient_history',methods=['POST'])
 def patientHistory():
-    print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
-
+ 
 
     if request.method=='POST':
 
         userDetails = request.get_json(force=True)
         patientID = userDetails['id']
         
-        print(patientID)
-        print('--------------------------------------------------------------------------------------------')
+ 
+ 
 
         sql= "Select * from patient_history WHERE id = {0}".format(patientID)
 
@@ -130,18 +129,44 @@ def patientHistory():
             rv = cur.fetchall()
 
             print(rv)
-            print('--------------------------------------------------------------------------------------------')
+           
             json_data=[]
             for result in rv:
 
                 json_data.append(dict(zip(row_headers,result)))
 
-            print('--------------------------------------------------------------------------------------------')
+            
             print(json_data)
         return jsonify(json_data)
 
 
-   
+def efficacy_predictions():
+    
+    #cur = mysql.connection.cursor()
+    #sql= "Select * from efficacy_modelling_data WHERE id = {0}".format(patientID)
+    #cur.execute(sql,(nameID,userPassword))
+    #row_headers=[x[0] for x in cur.description] #this will extract row headers
+    #rv = cur.fetchall()
+    #df = pd.DataFrame(rv)
+    #df = df.loc[:,:'DXC_Oral']
+    #df[userdetails] = 1
+    
+    return model.predict(df)
+
+def stage_prediction():
+    
+    #cur = mysql.connection.cursor()
+    #sql= "Select * from efficacy_modelling_data WHERE id = {0}".format(patientID)
+    #cur.execute(sql,(nameID,userPassword))
+    #row_headers=[x[0] for x in cur.description] #this will extract row headers
+    #rv = cur.fetchall()
+    #df = pd.DataFrame(rv)
+    #df = df.loc[:,:'DXC_Oral']
+    #df[userdetails] = 1
+    
+    return model.predict(df)
+    
+    
        
 
 if __name__ == '__main__':
