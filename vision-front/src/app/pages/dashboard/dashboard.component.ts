@@ -73,4 +73,15 @@ export class DashboardComponent implements OnInit {
     this.salesChart.update();
   }
 
+  resizeIframe(obj) {
+    console.log(obj);
+    var iframe = document.getElementById('iframeId');
+    if(window.screen.width <= 1280){
+      iframe.style.width = 800+'px';
+    }else{
+      iframe.style.width = 1330+'px';
+    }
+    // obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+  }
+
 }

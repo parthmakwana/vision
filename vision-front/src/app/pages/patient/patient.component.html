@@ -21,7 +21,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-search"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
+                                    <input id="myInput" class="form-control" placeholder="Search" type="text" (focus)="focus = true" (keyup)="myFunction()"
                                         (blur)="focus = false">
                                 </div>
                             </div>
