@@ -1,0 +1,4 @@
+.card .table td, .card .table th{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
