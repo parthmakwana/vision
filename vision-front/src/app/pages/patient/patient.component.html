@@ -22,7 +22,8 @@
                                         <span class="input-group-text"><i class="fas fa-search"></i></span>
                                     </div>
                                     <input id="myInput" class="form-control" placeholder="Search" type="text"
-                                        (focus)="focus = true" (keyup)="myFunction()" (blur)="focus = false">
+                                        [(ngModel)]="searchKeyword" (focus)="focus = true" (keyup)="searchData()"
+                                        (blur)="focus = false">
                                 </div>
                             </div>
                         </form>

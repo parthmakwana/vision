@@ -39,6 +39,8 @@ export class PatientComponent implements OnInit {
   naError: boolean = false;
   futureError: boolean = false;
   successModal: boolean = false;
+  masterData: Patient[] = [];
+  searchKeyword: string = "";
 
   ngOnInit(): void {
     this.loggedInID = this.localStorageService.getLoggedInID();
@@ -48,8 +50,9 @@ export class PatientComponent implements OnInit {
 
   getPatientData() {
     this.visionService.getPatientData().subscribe((res: any) => {
-      this.patientsData = res;
+      this.masterData = res;
       console.log("response from get api ", res);
+      this.patientsData = JSON.parse(JSON.stringify(res));
     })
   }
 
@@ -91,22 +94,23 @@ export class PatientComponent implements OnInit {
 
   }
 
-  myFunction() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("myTable");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[0];
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
+  searchData() {
+    if (this.searchKeyword) {
+      this.patientsData = [];
+      let keys: any[] = Object.keys(this.masterData[0]);
+      this.masterData.forEach(element => {
+        let found = false;
+        keys.forEach(key => {
+          if (element[key].toString().toUpperCase().indexOf(this.searchKeyword.toUpperCase()) > -1) {
+            found = true;
+          }
+        });
+        if (found) {
+          this.patientsData.push(element);
         }
-      }
+      });
+    } else {
+      this.patientsData = JSON.parse(JSON.stringify(this.masterData));
     }
   }
 
