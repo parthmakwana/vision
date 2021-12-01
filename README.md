@@ -15,7 +15,12 @@ SOP Link
 
 ## Extened Documentation 
 
-## How to Run 
+## Setup for Angular
+- Install NodeJS from https://nodejs.org/en/
+## How to Run Angular
+- Execute below commands from the project location
+1. npm install
+2. npm start
 
 ### Installing Dependencies 
 ### Setting up MySQL 
