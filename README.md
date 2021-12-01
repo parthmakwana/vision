@@ -39,10 +39,38 @@ SOP Link
 
 ********************************************** 
 
-## Environment Setup
+## Environment Setup and Installation
 - Install the stable version of Python using Anaconda or directly from the Python wensite 
 Anaconda - https://www.anaconda.com/products/individual
 Python - https://www.python.org/downloads/
+
+
+To RUN FLASK Server
+1. Run the app.py file from the folder
+2. If the IDE does not support  - Use Jupiter Notebook terminal.
+    - Move the db.yaml file in the same location as app.py
+    - Update the Path for :
+         model_efficacy =pickle.load(open('model_efficacy.pkl', 'rb'))
+         model_stage =pickle.load(open('model_stage.pkl', 'rb'))
+
+
+********************************************** 
+    ## Setup for MySQL
+
+********************************************** 
+## Environment Setup and Installation
+- Install MySQL Workbench V. 8.0 and MySQL Server
+  reference : https://www.youtube.com/watch?v=WuBcTJnIuzo&ab_channel=ProgrammingKnowledge
+- Import the Data Table Schema from the Data > SQL Table Data Schema into the MySQl
+
+
+********************************************** 
+    ## Project Execution Steps
+
+********************************************** 
+- Run the app.py from VSCode or Jupiter terminal
+- Run the Angular Server as mention in the Steps for Angular
+
 
 
 
