@@ -46,9 +46,9 @@ export class VisionService {
 
   getPrediction(body) {
 
-    console.log("response from patient history SERVICE ",body);
+    console.log("response from patient getPrediction SERVICE ",body);
 
-    return this.http.post('http://localhost:5000/read/patient_history',body);
+    return this.http.post('http://localhost:5000/read/patient_prediction',body);
   }
 
 
@@ -57,6 +57,28 @@ export class VisionService {
     console.log("response from drug Efficacy SERVICE ",body);
 
     return this.http.post('http://localhost:5000/read/drug_efficacy',body);
+  }
+
+  createAppointment(body) {
+
+    console.log("response from drug createAppointment SERVICE ",body);
+
+    return this.http.post('http://localhost:5000/create/createAppointment',body);
+  }
+
+  getAppointment(body) {
+
+    console.log("response from drug createAppointment SERVICE ",body);
+
+    return this.http.post('http://localhost:5000/read/getAppointment',body);
+  }
+
+
+  saveNotes(body) {
+
+    console.log("response from drug createAppointment SERVICE ",body);
+
+    return this.http.post('http://localhost:5000/update/saveNotes',body);
   }
 
 }

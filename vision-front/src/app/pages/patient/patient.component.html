@@ -99,10 +99,10 @@
     </div>
     <div class="modal-body ">
         <span>Name: {{selectedRow.name}}</span><br />
-        <span>Prescribed Drugs: {{selectedRow.prescribedDrugs}}</span><br />
-        <span>Cancer Stage: {{selectedRow.cancerStage}}</span><br />
-        <span>Prediction: {{predictionData.prediction}}</span><br />
-        <span>Probability: {{predictionData.probability}}</span>
+        <span>Prescribed Drugs: {{predictionData.Drug}}</span><br />
+        <span>Cancer Stage: {{predictionData.Stage}}</span><br />
+        <span>Prediction Stage: {{predictionData.Prediction}}</span>
+        
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
