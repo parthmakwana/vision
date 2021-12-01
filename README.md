@@ -13,9 +13,12 @@ This project is being developed as part of the Software System Implementation an
 
 SOP Link 
 
-## Extened Documentation 
+## Extened Documentation
 
-## Setup for Angular
+********************************************** 
+    ## Setup for Angular
+
+********************************************** 
 - Install NodeJS from https://nodejs.org/en/
 - Install Visual Studio Code from https://code.visualstudio.com/download
 ## How to Run Angular
@@ -29,3 +32,17 @@ SOP Link
 ### Installing Dependencies 
 ### Setting up MySQL 
 ### Running the Project 
+
+
+********************************************** 
+    ## Setup for Flask
+
+********************************************** 
+
+## Environment Setup
+- Install the stable version of Python using Anaconda or directly from the Python wensite 
+Anaconda - https://www.anaconda.com/products/individual
+Python - https://www.python.org/downloads/
+
+
+

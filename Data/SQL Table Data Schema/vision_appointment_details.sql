@@ -16,28 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `drugs`
+-- Table structure for table `appointment_details`
 --
 
-DROP TABLE IF EXISTS `drugs`;
+DROP TABLE IF EXISTS `appointment_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `drugs` (
+CREATE TABLE `appointment_details` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) NOT NULL,
-  `description` varchar(100) NOT NULL,
+  `patient_id` bigint NOT NULL,
+  `date_time` datetime NOT NULL,
+  `doctor_id` varchar(150) NOT NULL,
+  `notes` varchar(150) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `drugs`
+-- Dumping data for table `appointment_details`
 --
 
-LOCK TABLES `drugs` WRITE;
-/*!40000 ALTER TABLE `drugs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `drugs` ENABLE KEYS */;
+LOCK TABLES `appointment_details` WRITE;
+/*!40000 ALTER TABLE `appointment_details` DISABLE KEYS */;
+INSERT INTO `appointment_details` VALUES (1,2433445420,'2021-12-01 13:00:00','H49040',NULL,NULL),(2,1502585609,'2021-12-01 06:00:00','H49040',NULL,NULL),(3,3366528450,'2021-12-02 13:00:00','E75463',NULL,NULL),(4,8376011192,'2021-12-23 14:00:00','E75463',NULL,NULL);
+/*!40000 ALTER TABLE `appointment_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-27 18:05:49
+-- Dump completed on 2021-11-30 22:33:51

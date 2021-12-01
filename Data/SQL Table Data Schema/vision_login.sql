@@ -16,37 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `patient_history`
+-- Table structure for table `login`
 --
 
-DROP TABLE IF EXISTS `patient_history`;
+DROP TABLE IF EXISTS `login`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `patient_history` (
+CREATE TABLE `login` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `patient_id` int NOT NULL,
-  `appointment_id` int NOT NULL,
-  `weight` int NOT NULL,
-  `height` varchar(10) NOT NULL,
-  `blood_pressure` varchar(10) NOT NULL,
-  `diagnosis` varchar(50) NOT NULL,
-  `doc_notes` varchar(1000) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `UPIN` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `patient_id_idx` (`patient_id`),
-  KEY `appointment_id_idx` (`appointment_id`),
-  CONSTRAINT `appointment_id_fk` FOREIGN KEY (`id`) REFERENCES `appointment` (`id`),
-  CONSTRAINT `patient_id_fk` FOREIGN KEY (`id`) REFERENCES `patient` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `patient_history`
+-- Dumping data for table `login`
 --
 
-LOCK TABLES `patient_history` WRITE;
-/*!40000 ALTER TABLE `patient_history` DISABLE KEYS */;
-/*!40000 ALTER TABLE `patient_history` ENABLE KEYS */;
+LOCK TABLES `login` WRITE;
+/*!40000 ALTER TABLE `login` DISABLE KEYS */;
+INSERT INTO `login` VALUES (1,'JUAN C ABANSES','123456','H49040'),(2,'ELIA G ABBOUD','qwerty','E75463');
+/*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-27 18:05:48
+-- Dump completed on 2021-11-30 22:33:52
