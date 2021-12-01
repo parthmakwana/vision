@@ -25,7 +25,7 @@
                 <div class="table-responsive">
                     <table class="table align-items-center table-dark table-flush" id="myTable">
                         <thead class="thead-dark">
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="col">Patient Name</th>
                                 <th scope="col">Doctor Name</th>
                                 <th scope="col">Date and Time</th>
@@ -34,11 +34,20 @@
                             </tr>
                         </thead>
                         <tbody>
+<<<<<<< HEAD
                             <tr *ngFor="let a of appointmentData | slice: (page-1) * pageSize : page * pageSize">
                                 <td>{{a.name}}</td>
                                 <td>{{loggedInName}}</td>
                                 <td>{{a.date_time}}</td>
                                 <td>{{a.notes ? a.notes : '—'}}</td>
+=======
+                            <tr class="text-center"
+                                *ngFor="let a of appointmentData | slice: (page-1) * pageSize : page * pageSize">
+                                <td>{{a.patient_name}}</td>
+                                <td>{{a.doctor_name}}</td>
+                                <td>{{a.datetime}}</td>
+                                <td>{{a.doc_notes ? a.doc_notes : '—'}}</td>
+>>>>>>> 029c65d7ec06421d1b3545f0b557be580dafd4d3
                                 <td class="">
                                     <div ngbDropdown placement="bottom-right">
                                         <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
