@@ -25,7 +25,7 @@
                 <div class="table-responsive">
                     <table class="table align-items-center table-dark table-flush" id="myTable">
                         <thead class="thead-dark">
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="col">Patient Name</th>
                                 <th scope="col">Doctor Name</th>
                                 <th scope="col">Date and Time</th>
@@ -34,7 +34,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let a of appointmentData | slice: (page-1) * pageSize : page * pageSize">
+                            <tr class="text-center"
+                                *ngFor="let a of appointmentData | slice: (page-1) * pageSize : page * pageSize">
                                 <td>{{a.patient_name}}</td>
                                 <td>{{a.doctor_name}}</td>
                                 <td>{{a.datetime}}</td>

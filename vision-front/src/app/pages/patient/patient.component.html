@@ -15,7 +15,7 @@
                         <h3 class="text-white mb-0">Patient Data</h3>
                     </div>
                     <div class="col-xl-3 col-lg-3">
-                        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+                        <form class="navbar-search navbar-search-dark">
                             <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -32,7 +32,7 @@
                 <div class="table-responsive">
                     <table class="table align-items-center table-dark table-flush" id="myTable">
                         <thead class="thead-dark">
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="col">Name</th>
                                 <th scope="col">City</th>
                                 <th scope="col">Phone Number</th>
@@ -45,7 +45,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let p of patientsData | slice: (page-1) * pageSize : page * pageSize">
+                            <tr class="text-center"
+                                *ngFor="let p of patientsData | slice: (page-1) * pageSize : page * pageSize">
                                 <td>{{p.name}}</td>
                                 <td>{{p.city}}</td>
                                 <td>{{p.phone_number}}</td>

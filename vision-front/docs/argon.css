@@ -20945,12 +20945,12 @@ textarea[resize='horizontal']
 {
     margin-bottom: 0;
 }
-.card .table td,
+/* .card .table td,
 .card .table th
 {
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
-}
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+} */
 
 p
 {
