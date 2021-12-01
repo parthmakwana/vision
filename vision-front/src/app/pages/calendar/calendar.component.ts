@@ -53,7 +53,7 @@ export class CalendarComponent implements OnInit {
 
   addNotes(content, rowData: Appointment) {
     this.selectedRow = rowData;
-    this.notes = this.selectedRow.notes;
+    this.notes = this.selectedRow.doc_notes;
     this.modalService.open(content, { centered: true });
   }
 
