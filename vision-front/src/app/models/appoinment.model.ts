@@ -3,4 +3,5 @@ export class Appointment {
     doctor_name: string;
     datetime: any;
     doc_notes: string;
+    id:any;
 }

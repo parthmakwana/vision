@@ -15,7 +15,7 @@ export class DrugComponent implements OnInit {
   patientsData: Patient[] = [];
   selectedPatient: number;
   selectedDrug: any;
-  predictedEfficacy: any = "0%";
+  predictedEfficacy: any = "0";
   page: number = 1;
   pageSize: number = 5;
   public focus;

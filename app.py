@@ -3,13 +3,14 @@ from flask_mysqldb import MySQL
 import yaml
 from flask_cors import CORS
 import json
-# import pickle 
+import pandas as pd
+import pickle 
 # import glob
 # import numpy
 # #loading models
 # fin=glob.glob("models/model_efficacy-Copy1.pkl")
-# model_efficacy =pickle.load(open('models/model_efficacy.pkl', 'rb'))
-# #model_stage =pickle.load(open('/models/model_stage.pkl', 'rb'))
+model_efficacy =pickle.load(open('model_efficacy.pkl', 'rb'))
+model_stage =pickle.load(open('model_stage.pkl', 'rb'))
 
 app = Flask(__name__)
 CORS(app)
@@ -45,13 +46,15 @@ def drugsData():
     
     cur = mysql.connection.cursor()
 
-    resultValue = cur.execute("SELECT * from drugs_data")
+    resultValue = cur.execute("SELECT * from flat_drug_data")
 
     if resultValue > 0:
         #userDetails = cur.fetchall()
 
         row_headers=[x[0] for x in cur.description] #this will extract row headers
         rv = cur.fetchall()
+
+
         json_data=[]
         for result in rv:
                 json_data.append(dict(zip(row_headers,result)))
@@ -114,9 +117,6 @@ def patientHistory():
 
         userDetails = request.get_json(force=True)
         patientID = userDetails['id']
-        
- 
- 
 
         sql= "Select * from patient_history WHERE id = {0}".format(patientID)
 
@@ -139,34 +139,209 @@ def patientHistory():
             print(json_data)
         return jsonify(json_data)
 
-
+@app.route('/read/drug_efficacy',methods=['POST'])
 def efficacy_predictions():
-    
-    #cur = mysql.connection.cursor()
-    #sql= "Select * from efficacy_modelling_data WHERE id = {0}".format(patientID)
-    #cur.execute(sql,(nameID,userPassword))
-    #row_headers=[x[0] for x in cur.description] #this will extract row headers
-    #rv = cur.fetchall()
-    #df = pd.DataFrame(rv)
-    #df = df.loc[:,:'DXC_Oral']
-    #df[userdetails] = 1
-    
-    return model.predict(df)
 
+    if request.method=='POST':
+
+        drugDetails = request.get_json(force=True)
+        patientID = drugDetails['patientID']
+        drugName = drugDetails['drugName']
+    
+        cur = mysql.connection.cursor()
+        sql= "Select * from efficacy_prediction_modelling WHERE id = {0}".format(patientID)
+        cur.execute(sql)
+        row_headers=[x[0] for x in cur.description] #this will extract row headers
+        rv = cur.fetchall()
+
+        print('----------------------------------------------------------------------')
+
+        print(rv)
+        df = pd.DataFrame(rv)
+        df.columns = [ 'index','height', 'weight', 'age', 'drinks', 'smokes', 'bp-systolic',
+'bp-diast', 'tumor_size', 'temperature', 'stage','Xaretzi', 'DXC_Drug', 'Kras_5', 'Imfinzi', 'ADE_2.5', 'Kras',
+'DXC_Oral','double_lung_infection','id']
+        df = df.loc[:,'height':'double_lung_infection']
+        df[drugName] = 1
+
+       
+        print(model_efficacy.predict(df))
+        json_efficacy=model_efficacy.predict(df)
+        
+       
+        print(df)
+    
+        return (str(json_efficacy))
+
+    #return True
+
+@app.route('/read/patient_prediction',methods=['POST'])
 def stage_prediction():
     
-    #cur = mysql.connection.cursor()
-    #sql= "Select * from efficacy_modelling_data WHERE id = {0}".format(patientID)
-    #cur.execute(sql,(nameID,userPassword))
-    #row_headers=[x[0] for x in cur.description] #this will extract row headers
-    #rv = cur.fetchall()
-    #df = pd.DataFrame(rv)
-    #df = df.loc[:,:'DXC_Oral']
-    #df[userdetails] = 1
+     if request.method=='POST':
+
+        drugDetails = request.get_json(force=True)
+        patientID = drugDetails['id']
+        
     
-    return model.predict(df)
+        cur = mysql.connection.cursor()
+        sql= "Select * from stage_prediction_data WHERE id = {0}".format(patientID)
+        cur.execute(sql)
+        row_headers=[x[0] for x in cur.description] #this will extract row headers
+        rv = cur.fetchall()
+
+        print('----------------------------------------------------------------------')
+
+        print(rv)
+        df = pd.DataFrame(rv)
+        df.columns = ['height', 'weight',
+'age', 'drinks', 'smokes', 'bp-systolic', 'bp-diast', 'tumor_size',
+'temperature', 'stage' ,'Xaretzi', 'DXC_Drug', 'Kras_5', 'Imfinzi', 'ADE_2.5', 'Kras',
+'DXC_Oral' ,'double_lung_infection','id']
+        df = df.loc[:,'height':'double_lung_infection']
+        
+        print('------------------fjhwufh[owbfowjbrgfljgbksfjhbg----------------------------------------------------')
+        print(model_stage.predict(df))
+        
+        cur = mysql.connection.cursor()
+        sql1= "Select * from stage_prediction_data_original WHERE id = {0}".format(patientID)
+        cur.execute(sql1)
+        #row_headers=[x[0] for x in cur.description] #this will extract row headers
+        rv1 = cur.fetchall()
+        df1 = pd.DataFrame(rv1)
+        df1.columns = ['name', 'city', 'phone-number', 'date', 'ssn', 'id', 'height', 'weight',
+       'age', 'drinks', 'smokes', 'bp-systolic', 'bp-diast', 'tumor_size',
+       'temperature', 'stage', 'drug', 'double_lung_infection',
+       'predicted_stage']
+        print('------------------fjhwufh[owbfowjbrgfljgbksfjhbg----------------------------------------------------')
+        #json={'Prediction':str(model_stage.predict(df)),'Stage':str(df['stage']),'Drug':str(df1['drug'])}
+        json_data=dict()
+        prediction=model_stage.predict(df)
+        json_data["Prediction"]=str(prediction[0])
+        json_data["Stage"]=df.iloc[0]['stage']
+        json_data["Drug"]=str(df1.iloc[0]['drug'])
+        print("dcscds",str(df1.iloc[0]['drug']))
+        
+        print(type(prediction))
+        
+       
+        
+        return jsonify(json_data)
+        
+        
+@app.route('/create/createAppointment',methods=['POST'])
+def createAppointment():
     
+     if request.method=='POST':
+
+        drugDetails = request.get_json(force=True)
+        patient_id = drugDetails['patient_id']
+        doctor_id = drugDetails['doctor_id']
+        date_time = drugDetails['date_time']
+        
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO appointment_details(patient_id,doctor_id,date_time) VALUES (%s ,%s,%s)",(patient_id,doctor_id,date_time))
+        mysql.connection.commit()
+        cur.close()
+        
+        status={'status':True}
+        
     
+        
+        
+       
+        
+        return jsonify(status) 
+     else:
+        status={'status':False}
+        
+        return jsonify(status)
+        
+    
+        
+    #return True
+    
+        
+@app.route('/read/getAppointment',methods=['POST'])
+def getAppointment():
+    
+     if request.method=='POST':
+
+        appointmentDetails = request.get_json(force=True)
+        
+        doctor_id = appointmentDetails['doctor_id']
+        date_time = appointmentDetails['date_time']
+        print('------------------fjhwufh[owbfowjbrgfljgbksfjhbg----------------------------------------------------')
+               
+        print(date_time)
+        
+        
+        
+        cur = mysql.connection.cursor()
+        
+        sql="  select appointment_details.id , patient_data.name, appointment_details.date_time, appointment_details.notes from appointment_details inner join patient_data on appointment_details.patient_id = patient_data.id where date_time between  %s and %s and doctor_id =%s"
+        
+#         sql="  select patient_data.name, appointment_details.date_time, appointment_details.notes from appointment_details inner join patient_data on appointment_details.patient_id = patient_data.id where doctor_id =%s"
+
+        resultValue = cur.execute(sql,(date_time+' 00:00:00',date_time+ ' 23:59:59',doctor_id))
+
+        if resultValue > 0:
+            #userDetails = cur.fetchall()
+
+            row_headers=[x[0] for x in cur.description] #this will extract row headers
+            rv = cur.fetchall()
+
+
+            json_data=[]
+            for result in rv:
+                    json_data.append(dict(zip(row_headers,result)))
+                    
+            print('------------------fjhwufh[owbfowjbrgfljgbksfjhbg----------------------------------------------------')
+                    
+            print(json_data)
+            return jsonify(json_data)
+        else:
+            json_data=[]
+            return jsonify(json_data)
+            
+                
+@app.route('/create/update/saveNotes',methods=['POST'])
+def saveNotes():
+    
+     if request.method=='POST':
+
+        drugDetails = request.get_json(force=True)
+        row_id = drugDetails['id']
+        notes = drugDetails['notes']
+        date_time = drugDetails['date_time']
+        
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO appointment_details(patient_id,doctor_id,date_time) VALUES (%s ,%s,%s)",(patient_id,doctor_id,date_time))
+        mysql.connection.commit()
+        cur.close()
+        
+        status={'status':True}
+        
+    
+        
+        
+       
+        
+        return jsonify(status) 
+     else:
+        status={'status':False}
+        
+        return jsonify(status)
+        
+    
+        
+    #return True                
+                
+
+        
+    
+
+        
        
 
 if __name__ == '__main__':

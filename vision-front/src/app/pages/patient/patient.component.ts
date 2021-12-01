@@ -27,7 +27,7 @@ export class PatientComponent implements OnInit {
 
 
   selectedRow: Patient = new Patient();
-  predictionData: any = { prediction: 4, probability: "67%" };
+  predictionData: any = {};
   page: number = 1;
   pageSize: number = 5;
   public focus;
@@ -68,7 +68,7 @@ export class PatientComponent implements OnInit {
 
       this.predictionData = res
 
-      console.log("response from login cdcvzd ", this.historyData);
+      console.log("response from getPrediction cdcvzd ", res);
     })
 
 
@@ -82,7 +82,7 @@ export class PatientComponent implements OnInit {
     // call api to fetch history
     let body = { "id": rowData.id }
     this.getPrediction(JSON.stringify(body));
-    console.log("response from patient history cdcvzd ", body);
+    console.log("response from patient viewPrediction cdcvzd ", body);
 
 
 
@@ -139,7 +139,14 @@ export class PatientComponent implements OnInit {
       // use selectedRow to get patient id and use loggedInID to get doctor ID
       // call setup api. if false then make naError true to display error msg else make successModal true
       // this.naError = true;
-      this.successModal = true;
+      let body = { "patient_id": this.selectedRow.id, "doctor_id":this.loggedInID,"date_time":this.formattedDatetime}
+      this.visionService.createAppointment(body).subscribe((res: any) => {
+
+        this.successModal =  res
+  
+        console.log("response from getPrediction cdcvzd ", res);
+      })
+      
     }
   }
 

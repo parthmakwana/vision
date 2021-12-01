@@ -35,10 +35,10 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let a of appointmentData | slice: (page-1) * pageSize : page * pageSize">
-                                <td>{{a.patient_name}}</td>
-                                <td>{{a.doctor_name}}</td>
-                                <td>{{a.datetime}}</td>
-                                <td>{{a.doc_notes ? a.doc_notes : '—'}}</td>
+                                <td>{{a.name}}</td>
+                                <td>{{loggedInName}}</td>
+                                <td>{{a.date_time}}</td>
+                                <td>{{a.notes ? a.notes : '—'}}</td>
                                 <td class="">
                                     <div ngbDropdown placement="bottom-right">
                                         <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
