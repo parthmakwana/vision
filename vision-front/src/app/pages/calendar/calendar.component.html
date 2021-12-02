@@ -30,7 +30,7 @@
                                 <th scope="col">Doctor Name</th>
                                 <th scope="col">Date and Time</th>
                                 <th scope="col">Doctor Notes</th>
-                                <!-- <th scope="col">Action</th> -->
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,7 +42,7 @@
                                 <td>{{a.date_time}}</td>
                                 <td>{{a.notes ? a.notes : '—'}}</td>
 
-                                <!-- <td class="">
+                                <td class="">
                                     <div ngbDropdown placement="bottom-right">
                                         <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                                             <i class="fas fa-ellipsis-v"></i>
@@ -54,7 +54,7 @@
                                                 (click)="deleteAppointment(content,a)">Delete Appointment</a>
                                         </div>
                                     </div>
-                                </td> -->
+                                </td>
                             </tr>
                             <tr *ngIf="appointmentData.length==0" class="text-center">
                                 <td colspan="5">
