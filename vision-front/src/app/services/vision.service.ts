@@ -76,9 +76,16 @@ export class VisionService {
 
   saveNotes(body) {
 
-    console.log("response from drug createAppointment SERVICE ",body);
+    console.log("response from saveNotes SERVICE ",body);
 
     return this.http.post('http://localhost:5000/update/saveNotes',body);
+  }
+
+  deleteAppointment(body) {
+
+    console.log("response from deleteAppointment SERVICE ",body);
+
+    return this.http.post('http://localhost:5000/delete/deleteAppointment',body);
   }
 
 }

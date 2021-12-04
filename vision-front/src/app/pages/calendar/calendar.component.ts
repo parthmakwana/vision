@@ -59,20 +59,40 @@ export class CalendarComponent implements OnInit {
 
   deleteAppointment(content, rowData: Appointment) {
     // take record id from rowData and call api. after success open below modal to display success msg
-    this.modalService.open(content, { centered: true });
+    
+    let body = { "id":this.selectedRow.id}
+    console.log("response from deleteAppointment fgf ", body);
+
+
+    this.visionService.deleteAppointment(body).subscribe((res: any) => {
+
+      this.modalService.open(content, { centered: true });
+
+
+      
+
+
+      console.log("response from deleteAppointment cdcvzd ", res);
+    })
+
+
   }
 
   saveNotes() {
     // call api to save notes. use selectedRow to get appointment id and notes to get entered note and then after success make successModal true
-    this.successModal = true;
+    
 
     let body = { "id":this.selectedRow.id,"notes":this.notes}
       this.visionService.saveNotes(body).subscribe((res: any) => {
 
         this.appointmentData=res
 
+        if(this.appointmentData['status']){
+          this.successModal = true;
+        }
+
   
-        console.log("response from onCustomDateChange cdcvzd ", res);
+        console.log("response from saveNotes cdcvzd ", this.appointmentData['status']);
       })
 
 

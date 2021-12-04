@@ -305,7 +305,7 @@ def getAppointment():
             return jsonify(json_data)
             
                 
-@app.route('/create/update/saveNotes',methods=['POST'])
+@app.route('/update/saveNotes',methods=['POST'])
 def saveNotes():
     
      if request.method=='POST':
@@ -313,10 +313,15 @@ def saveNotes():
         drugDetails = request.get_json(force=True)
         row_id = drugDetails['id']
         notes = drugDetails['notes']
-        date_time = drugDetails['date_time']
+        
+        print('----------------------------------------------------------------------')
+                    
+        print(row_id,notes)
+   
         
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO appointment_details(patient_id,doctor_id,date_time) VALUES (%s ,%s,%s)",(patient_id,doctor_id,date_time))
+        sql="UPDATE appointment_details SET notes = %s WHERE id = %s"
+        cur.execute(sql,(notes,row_id))
         mysql.connection.commit()
         cur.close()
         
@@ -338,7 +343,46 @@ def saveNotes():
     #return True                
                 
 
+@app.route('/delete/deleteAppointment',methods=['POST'])
+def deleteAppointment():
+    
+     if request.method=='POST':
+
+        drugDetails = request.get_json(force=True)
+        row_id = drugDetails['id']
+       
         
+        print('---------------vsdfvs-------------------------------------------------------')
+                    
+        print(row_id)
+   
+        
+        cur = mysql.connection.cursor()
+        sql="DELETE FROM appointment_details WHERE id = %s"
+        cur.execute(sql,(row_id))
+        mysql.connection.commit()
+        cur.close()
+        
+        status={'status':True}
+        
+    
+        
+        
+       
+        
+        return jsonify(status) 
+     else:
+        status={'status':False}
+        
+        return jsonify(status)
+        
+    
+        
+    #return True                
+                
+
+    
+    
     
 
         
