@@ -1,3 +1,18 @@
 textarea {
     resize: none;
 }
+
+td{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90%;
+}
+
+table{
+    table-layout: fixed;
+}
+
+.action-cls{
+    overflow: visible;
+}

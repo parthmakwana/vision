@@ -19,10 +19,11 @@ export class CalendarComponent implements OnInit {
   pageSize: number = 5;
   selectedRow: Appointment;
   successModal: boolean = false;
-  notes: string = "";
+  notes: string = "test Notes";
   loggedInID: any;
   loggedInName: any;
   appointmentData: Appointment[] = [];
+  viewMode: boolean = false;
 
   constructor(private modalService: NgbModal, private visionService: VisionService, private localStorageService: LocalStorageService) { }
 
@@ -51,16 +52,24 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  addNotes(content, rowData: Appointment) {
+  addNotes(content, rowData: Appointment, mode: string) {
+    if(mode=='view'){
+      this.viewMode= true;
+    }else{
+      this.viewMode = false;
+    }
+    this.successModal=false;
     this.selectedRow = rowData;
-    this.notes = this.selectedRow.doc_notes;
+    this.notes = this.selectedRow.notes;
+    console.log("response from addNotes  ", this.selectedRow);
+
     this.modalService.open(content, { centered: true });
   }
 
   deleteAppointment(content, rowData: Appointment) {
     // take record id from rowData and call api. after success open below modal to display success msg
 
-    let body = { "id": this.selectedRow.id }
+    let body = { "id": rowData.id }
     console.log("response from deleteAppointment fgf ", body);
 
 

@@ -42,14 +42,16 @@
                                 <td>{{a.date_time}}</td>
                                 <td>{{a.notes ? a.notes : '—'}}</td>
 
-                                <td class="">
+                                <td class="action-cls">
                                     <div ngbDropdown placement="bottom-right">
                                         <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                (click)="addNotes(notescontent,a)">Add Notes</a>
+                                                (click)="addNotes(notescontent,a, 'view')">View Notes</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                (click)="addNotes(notescontent,a, 'edit')">Add Notes</a>
                                             <a class="dropdown-item" href="javascript:void(0)"
                                                 (click)="deleteAppointment(content,a)">Delete Appointment</a>
                                         </div>
@@ -91,7 +93,7 @@
 
 <ng-template #notescontent let-notesmodal>
     <div class="modal-header">
-        <h4 *ngIf="!successModal" class="modal-title">Enter Notes</h4>
+        <h4 *ngIf="!successModal" class="modal-title"><span *ngIf="viewMode">View</span><span *ngIf="!viewMode">Enter</span> Notes</h4>
         <h4 *ngIf="successModal" class="modal-title">Success</h4>
         <button type="button" class="close" aria-label="Close" (click)="notesmodal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
@@ -99,10 +101,13 @@
     </div>
     <div *ngIf="!successModal" class="modal-body text-center">
         <div class="card bg-default p-2">
-            <textarea class="bg-default text-white" rows="5" [(ngModel)]="notes"
+            <textarea class="bg-default text-white" rows="5" [(ngModel)]="notes" [disabled]="viewMode"
                 placeholder="Type your notes"></textarea>
-            <div class="col-xl-12 col-lg-12 text-center mt-2 mb-2">
-                <button type="button" class="btn btn-primary" (click)="saveNotes();">Save notes</button>
+                <div class="col-xl-12 col-lg-12 text-center mt-2 mb-2" *ngIf="viewMode">
+                    <button type="button" class="btn btn-primary" (click)="viewMode=false;">Edit Notes</button>
+                </div>
+                <div class="col-xl-12 col-lg-12 text-center mt-2 mb-2" *ngIf="!viewMode">
+                <button type="button" class="btn btn-primary" (click)="saveNotes();">Save Notes</button>
             </div>
         </div>
     </div>
