@@ -24,7 +24,7 @@ export class CalendarComponent implements OnInit {
   loggedInName: any;
   appointmentData: Appointment[] = [];
 
-  constructor(private modalService: NgbModal,private visionService: VisionService,private localStorageService: LocalStorageService) { }
+  constructor(private modalService: NgbModal, private visionService: VisionService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
 
@@ -39,14 +39,14 @@ export class CalendarComponent implements OnInit {
     // use formattedDateTime to fetch appointment data
     // call api to get appointment data
 
-    let body = { "doctor_id":this.loggedInID,"date_time":this.formattedDatetime}
-      this.visionService.getAppointment(body).subscribe((res: any) => {
+    let body = { "doctor_id": this.loggedInID, "date_time": this.formattedDatetime }
+    this.visionService.getAppointment(body).subscribe((res: any) => {
 
-        this.appointmentData=res
+      this.appointmentData = res
 
-  
-        console.log("response from onCustomDateChange cdcvzd ", res);
-      })
+
+      console.log("response from onCustomDateChange cdcvzd ", res);
+    })
 
 
   }
@@ -59,17 +59,18 @@ export class CalendarComponent implements OnInit {
 
   deleteAppointment(content, rowData: Appointment) {
     // take record id from rowData and call api. after success open below modal to display success msg
-    
-    let body = { "id":this.selectedRow.id}
+
+    let body = { "id": this.selectedRow.id }
     console.log("response from deleteAppointment fgf ", body);
 
 
     this.visionService.deleteAppointment(body).subscribe((res: any) => {
 
       this.modalService.open(content, { centered: true });
+      this.onCustomDateChange(null);
 
 
-      
+
 
 
       console.log("response from deleteAppointment cdcvzd ", res);
@@ -80,20 +81,21 @@ export class CalendarComponent implements OnInit {
 
   saveNotes() {
     // call api to save notes. use selectedRow to get appointment id and notes to get entered note and then after success make successModal true
-    
 
-    let body = { "id":this.selectedRow.id,"notes":this.notes}
-      this.visionService.saveNotes(body).subscribe((res: any) => {
 
-        this.appointmentData=res
+    let body = { "id": this.selectedRow.id, "notes": this.notes }
+    this.visionService.saveNotes(body).subscribe((res: any) => {
 
-        if(this.appointmentData['status']){
-          this.successModal = true;
-        }
+      this.appointmentData = res
 
-  
-        console.log("response from saveNotes cdcvzd ", this.appointmentData['status']);
-      })
+      if (this.appointmentData['status']) {
+        this.successModal = true;
+        this.onCustomDateChange(null);
+      }
+
+
+      console.log("response from saveNotes cdcvzd ", this.appointmentData['status']);
+    })
 
 
   }
