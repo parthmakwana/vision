@@ -25,7 +25,11 @@ export class CalendarComponent implements OnInit {
   appointmentData: Appointment[] = [];
   viewMode: boolean = false;
 
-  constructor(private modalService: NgbModal, private visionService: VisionService, private localStorageService: LocalStorageService) { }
+  constructor(private modalService: NgbModal,
+    private visionService: VisionService,
+    private localStorageService: LocalStorageService) {
+    this.visionService.validateLoggedInSession();
+  }
 
   ngOnInit(): void {
 
@@ -53,12 +57,12 @@ export class CalendarComponent implements OnInit {
   }
 
   addNotes(content, rowData: Appointment, mode: string) {
-    if(mode=='view'){
-      this.viewMode= true;
-    }else{
+    if (mode == 'view') {
+      this.viewMode = true;
+    } else {
       this.viewMode = false;
     }
-    this.successModal=false;
+    this.successModal = false;
     this.selectedRow = rowData;
     this.notes = this.selectedRow.notes;
     console.log("response from addNotes  ", this.selectedRow);
