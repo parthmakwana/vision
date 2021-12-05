@@ -354,12 +354,12 @@ def deleteAppointment():
         
         print('---------------vsdfvs-------------------------------------------------------')
                     
-        print(row_id)
+        print(type(row_id))
    
         
         cur = mysql.connection.cursor()
-        sql="DELETE FROM appointment_details WHERE id = %s"
-        cur.execute(sql,(row_id))
+        sql="DELETE FROM appointment_details WHERE id = {0}".format(row_id)
+        cur.execute(sql)
         mysql.connection.commit()
         cur.close()
         
